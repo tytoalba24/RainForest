@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Timer</title>
+    <style>
+        #timer-display {
+            font-size: 24px;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .timer-button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 10px;
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+
+        .timer-button:hover {
+            background-color: #eee;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Timer</h1>
+    <div id="timer-display"></div>
+    <div class="timer-button">
+        <button id="10-minutes">10 minutes</button>
+    </div>
+    <div class="timer-button">
+        <button id="15-minutes">15 minutes</button>
+    </div>
+    <div class="timer-button">
+        <button id="20-minutes">20 minutes</button>
+    </div>
+    <div class="timer-button">
+        <button id="30-minutes">30 minutes</button>
+    </div>
+    <div class="timer-button">
+        <button id="45-minutes">45 minutes</button>
+    </div>
+    <div class="timer-button">
+        <button id="1-hour">1 hour</button>
+    </div>
+    <script>
+        var timerDisplay = document.getElementById("timer-display");
+
+        var buttons = document.querySelectorAll(".timer-button");
+
+        for (var i = 0; i < buttons.length; i++) {
+            buttons[i].addEventListener("click", function () {
+                var time = this.id.substring(0, this.id.length - 1);
+                var interval = setInterval(function () {
+                    --time;
+                    var minutes = Math.floor(time / 60);
+                    var seconds = time % 60;
+                    timerDisplay.innerHTML = (minutes < 10 ? "0" + minutes : minutes) + ":" + (seconds <
+                        10 ? "0" + seconds : seconds);
+                    if (time <= 0) {
+                        clearInterval(interval);
+                    }
+                }, 1000);
+            });
+        }
+    </script>
+</body>
+
+</html>
